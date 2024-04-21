@@ -1,0 +1,16 @@
+{
+  "name": "software-development",
+  "version": "1.0.0",
+  "description": "This is a public repo for lessons about software development focusing on design principles &amp; patterns",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx ts-node index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
