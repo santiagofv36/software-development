@@ -5,6 +5,7 @@ import {
   PushNotifier,
   SMSNotifier,
 } from './patterns/decorator/decorator.class';
+import { LinkedList } from './patterns/iterator/iterator.class';
 import {
   Caretaker,
   ConcreteMemento,
@@ -82,3 +83,16 @@ print(
   'Tamaño total de ',
   rootFolder.getName() + ': ' + String(rootFolder.getSize())
 ); // Output: Tamaño total de la carpeta raíz: 450
+
+print('-------------------Iterator-------------------');
+
+// Ejemplo de uso
+const linkedList = new LinkedList<number>();
+linkedList.append(1);
+linkedList.append(2);
+linkedList.append(3);
+
+// Iterar sobre la lista enlazada utilizando el iterador
+for (const item of linkedList) {
+  console.log(item);
+}
