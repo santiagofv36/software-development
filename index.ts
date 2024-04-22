@@ -16,6 +16,11 @@ import {
   PlayingState,
   StoppedState,
 } from './patterns/state/state.class';
+import {
+  CreditCardPaymentStrategy,
+  PayPalPaymentStrategy,
+  PaymentProcessor,
+} from './patterns/strategy/strategy.class';
 import print from './utils/print';
 
 const editor = new TextEditor('Hola mundo');
@@ -123,3 +128,12 @@ player.pause(); // Pone en pausa
 player.changeState(new StoppedState());
 player.stop(); // Detiene la reproducción
 player.play(); // Inicia la reproducción nuevamente
+
+print('-------------------Strategy-------------------');
+const paymentProcessor = new PaymentProcessor<string>(
+  new CreditCardPaymentStrategy()
+);
+paymentProcessor.processPayment(100, 'Datos de la tarjeta de crédito');
+
+paymentProcessor.setPaymentStrategy(new PayPalPaymentStrategy());
+paymentProcessor.processPayment(50, 'Datos de la cuenta de PayPal');
