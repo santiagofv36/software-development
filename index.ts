@@ -11,12 +11,14 @@ import {
   ConcreteMemento,
   TextEditor,
 } from './patterns/memento/memento.class';
+import { Publisher, User } from './patterns/observer/observer.class';
 import {
   AudioPlayer,
   PlayingState,
   StoppedState,
 } from './patterns/state/state.class';
 import {
+  BankTransferPaymentStrategy,
   CreditCardPaymentStrategy,
   PayPalPaymentStrategy,
   PaymentProcessor,
@@ -137,3 +139,27 @@ paymentProcessor.processPayment(100, 'Datos de la tarjeta de crédito');
 
 paymentProcessor.setPaymentStrategy(new PayPalPaymentStrategy());
 paymentProcessor.processPayment(50, 'Datos de la cuenta de PayPal');
+paymentProcessor.setPaymentStrategy(new BankTransferPaymentStrategy());
+paymentProcessor.processPayment(200, 'Datos de la cuenta bancaria');
+
+print('-------------------Observer-------------------');
+const publisher = new Publisher<string>();
+
+// Crear usuarios (observadores)
+const user1 = new User<string>('Usuario1');
+const user2 = new User<string>('Usuario2');
+const user3 = new User<string>('Usuario3');
+
+// Los usuarios siguen al publicador
+publisher.subscribe(user1);
+publisher.subscribe(user2);
+publisher.subscribe(user3);
+
+// El publicador publica una nueva publicación
+publisher.publish('¡Nueva foto de vacaciones!');
+
+// El usuario 2 deja de seguir al publicador
+publisher.unsubscribe(user2);
+
+// El publicador publica otra nueva publicación
+publisher.publish('¡Gran artículo sobre tecnología!');
