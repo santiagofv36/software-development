@@ -11,6 +11,11 @@ import {
   ConcreteMemento,
   TextEditor,
 } from './patterns/memento/memento.class';
+import {
+  AudioPlayer,
+  PlayingState,
+  StoppedState,
+} from './patterns/state/state.class';
 import print from './utils/print';
 
 const editor = new TextEditor('Hola mundo');
@@ -47,11 +52,10 @@ print(editor.content); // Output: Contenido editado
 
 print('-------------------Decorator-------------------');
 
-// Ejemplo de uso
 const baseNotifier = new BaseNotifier();
 baseNotifier.send('Notificación base');
 
-const smsNotifier = new SMSNotifier(baseNotifier);
+const smsNotifier = new SMSNotifier(new BaseNotifier());
 smsNotifier.send('Notificación importante');
 
 const emailNotifier = new EmailNotifier(baseNotifier);
@@ -61,7 +65,7 @@ const pushNotifier = new PushNotifier(baseNotifier);
 pushNotifier.send('Notificación prioritaria');
 
 print('-------------------Composite-------------------');
-// Ejemplo de uso
+
 const file1 = new CustomFile('Archivo1.txt', 100); // Tamaño: 100 bytes
 const file2 = new CustomFile('Archivo2.txt', 200); // Tamaño: 200 bytes
 const file3 = new CustomFile('Archivo3.txt', 150); // Tamaño: 150 bytes
@@ -85,14 +89,37 @@ print(
 ); // Output: Tamaño total de la carpeta raíz: 450
 
 print('-------------------Iterator-------------------');
+// Example usage
+const list = new LinkedList<number>();
+list.add(1);
+list.add(2);
+list.add(3);
 
-// Ejemplo de uso
-const linkedList = new LinkedList<number>();
-linkedList.append(1);
-linkedList.append(2);
-linkedList.append(3);
+// La lista tiene un metodo para crear un iterable y a su vez un iterable tiene la proiedad de crear un iterador
+const iterable = list.createIterable();
+const iterator = iterable.createIterator();
+// Mientras haya un siguiente elemento, se imprime el valor del nodo actual
 
-// Iterar sobre la lista enlazada utilizando el iterador
-for (const item of linkedList) {
-  console.log(item);
+while (iterator.hasNext()) {
+  print(iterator.next());
 }
+
+print('Se elimina el utlimo elemento de la lista');
+list.pop();
+
+const iterable2 = list.createIterable();
+const iterator2 = iterable2.createIterator();
+
+while (iterator2.hasNext()) {
+  print(iterator2.next());
+}
+
+print('-------------------State-------------------');
+
+const player = new AudioPlayer();
+player.changeState(new PlayingState());
+player.play(); // Inicia la reproducción
+player.pause(); // Pone en pausa
+player.changeState(new StoppedState());
+player.stop(); // Detiene la reproducción
+player.play(); // Inicia la reproducción nuevamente
