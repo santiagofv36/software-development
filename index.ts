@@ -1,28 +1,25 @@
-import { CustomFile, Folder } from './patterns/composite/composite.class';
-import {
-  BaseNotifier,
-  EmailNotifier,
-  PushNotifier,
-  SMSNotifier,
-} from './patterns/decorator/decorator.class';
-import { LinkedList } from './patterns/iterator/iterator.class';
-import {
-  Caretaker,
-  ConcreteMemento,
-  TextEditor,
-} from './patterns/memento/memento.class';
-import { Publisher, User } from './patterns/observer/observer.class';
 import {
   AudioPlayer,
-  PlayingState,
-  StoppedState,
-} from './patterns/state/state.class';
-import {
   BankTransferPaymentStrategy,
+  BaseNotifier,
+  Caretaker,
+  ConcreteMemento,
   CreditCardPaymentStrategy,
+  CustomFile,
+  EmailNotifier,
+  Folder,
+  LinkedList,
   PayPalPaymentStrategy,
   PaymentProcessor,
-} from './patterns/strategy/strategy.class';
+  PlayingState,
+  Publisher,
+  PushNotifier,
+  SMSNotifier,
+  StoppedState,
+  TextEditor,
+  User,
+  WebServerProxy,
+} from './patterns';
 import print from './utils/print';
 
 const editor = new TextEditor('Hola mundo');
@@ -163,3 +160,12 @@ publisher.unsubscribe(user2);
 
 // El publicador publica otra nueva publicación
 publisher.publish('¡Gran artículo sobre tecnología!');
+
+print('-------------------Proxy-------------------');
+const proxyServer = new WebServerProxy();
+
+// Solicitudes de acceso a diferentes sitios
+proxyServer.request('google.com'); // Permitido
+proxyServer.request('sitio1.com'); // Bloqueado
+proxyServer.request('openai.com'); // Permitido
+proxyServer.request('sitio2.com'); // Bloqueado
