@@ -4,14 +4,14 @@ interface WebServer {
 }
 
 // Implementación del Servidor Web Externo
-class RealWebServer implements WebServer {
+export class RealWebServer implements WebServer {
   request(url: string): void {
     console.log(`Solicitud enviada al servidor externo para la URL: ${url}`);
   }
 }
 
 // Implementación del Proxy del Servidor Web
-class WebServerProxy implements WebServer {
+export class WebServerProxy implements WebServer {
   private realServer: RealWebServer;
   private bannedSites: Set<string>;
 
