@@ -1,3 +1,3 @@
-export default function print<T>(...args: T[]) {
+export default function print(...args: any[]) {
   console.log(...args);
 }
