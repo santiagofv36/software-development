@@ -10,6 +10,12 @@ class PositiveNumberRule implements ValidationRule<number> {
   }
 }
 
+class NegativeNumberRule implements ValidationRule<number> {
+  isValid(data: number): boolean {
+    return data < 0;
+  }
+}
+
 // Implementación de una regla de validación para cadenas no vacías
 class NonEmptyStringRule implements ValidationRule<string> {
   isValid(data: string): boolean {
